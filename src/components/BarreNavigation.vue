@@ -3,17 +3,13 @@
 <div id="Navig">
         <nav><h4>
 
-            <Navigation url="testurl" label="Maison"/>
+            <Navigation url="./../maison/nom" label="Maison"/>
             <span> - </span>
-            <Navigation url="testurl" label="Discutons !!"/>
+            <Navigation url="chaturl" label="Discutons !!"/>
             <span> - </span>
-            <Navigation url="testurl" label="Jouons !!"/>
+            <Navigation url="jeuurl" label="Jouons !!"/>
             <span> - </span>
-            <Navigation url="testurl" label="Au revoir"/>
-
-
-
-
+            <Navigation url="./../" label="Au revoir"/>
 
         </h4></nav>
 
@@ -29,7 +25,10 @@ export default {
     name: "BarreNavigation",
     components:{
     Navigation
-}
+    },
+    // props:{
+    //     nom:String,
+    // },
 
 }
 </script>

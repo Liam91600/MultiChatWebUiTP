@@ -1,13 +1,14 @@
 <template>
     <button @click="clickMe">
-        <img v-if="!imageurl==''" :src="require('@/assets' + imageurl)"/>
-        <h2 v-if="imageurl"></h2>
+        <img :src="require('@/assets' + imageurl)" alt="Case de jeu" height="110" width="110"/>
     </button>
 </template>
 
 <script>
-const urlours= '/img/giphy.gif'
-const urlf1= '/img/gighy.webp'
+
+const urlcroix = '/img/croix.png'
+const urlrond = '/img/rond.png'
+const urlvide = '/img/vide.png'
 
 export default {
     props:{
@@ -17,18 +18,15 @@ export default {
 
     computed:{
         imageurl: function(){
-            if(this.image==''){
-                return ''
+
+            if(this.image=='croix'){
+                return urlcroix;
             }
-            else{
-                if(this.image=='ours'){
-                 return urlours;
-                }
-                if(this.image=='f1'){
-                    return urlf1;
-                }
-                return '';
+            if(this.image=='rond'){
+                return urlrond;
             }
+            return urlvide;
+
         }
     },
 
@@ -39,3 +37,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+#case{
+    /* width: 110px;
+    height: 110px; */
+}
+
+</style>

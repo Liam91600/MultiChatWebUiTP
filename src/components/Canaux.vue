@@ -1,4 +1,7 @@
 <template>
+    <Titre msg="Bienvenue sur la page de chat !!!"/>
+    <BarreNavigation/>
+
     <table id="liste-chat" class="center">
         <thead>
             <tr>
@@ -15,24 +18,65 @@
             
             </tr>
         </tbody>
-
-
-
     </table>
+    <span>--------------------</span>
+
+    <div>
+        <button @click="chatConnect">Blablabla ...</button>
+        <div>
+            <span><pre>{{ chatAllMessage }}</pre></span>
+        </div>
+        <input v-model="reponse" style="width:300px"/>
+        <button @click="sendReponse">répondre ...</button>
+        <p>
+            <button @click="chatBye">ByeBye ...</button>
+        </p>
+
+
+    </div>
 
 </template>
 
 <script>
+import Titre from '@/components/Titre.vue';
+import BarreNavigation from './BarreNavigation.vue';
+
 export default{
+
+    name:"CanauxPage",
+    components:{
+        Titre,
+        BarreNavigation
+    },
     data(){
         return{
             leschat:{
                 canalId: "",
                 canalName: "",
                 canalDescription: "",
-            }
+            },
+            reponse: '',
+            chatMessage:{
+                canalId: 0,
+                lePseudo: "",
+                leContenu: "",
+            },
+            chatReponse: {
+                canalId: 0,
+                lePseudo: "",
+                leContenu: "",
+            },
+            chatAllMessage: "",
+            serverUrl:"ws://localhost:8082/ws/multichat/1:Liam",
         }
     },
+
+    // props:{
+    //     pseudo: {
+    //         type:String,
+    //         required:true,
+    //     },
+    // },
 
 
     mounted(){
@@ -69,12 +113,16 @@ export default{
 
         chatBye(){
             this.ws.close();
+            console.log("Déconnexion")
             this.ws = null;
             this.chatAllMessage = '';
         },
 
         sendReponse(){
-            this.chatReponse.lePseudo
+            this.chatReponse.lePseudo = this.$store.getters.getLeUser;
+            this.chatReponse.leContenu = this.reponse;
+            this.ws.send(JSON.stringify(this.chatReponse));
+            this.reponse ='';
         },
 
         chatConnect(){
@@ -82,7 +130,7 @@ export default{
             this.ws=new WebSocket(this.serverUrl);
             this.ws.onopen = function (event){
                 console.log(event);
-                console.log("On est connexté !!!");
+                console.log("On est connecté !!!");
             };
             this.ws.addEventListener('message', (event) => {this.handleNewMessage(event)})
 
@@ -94,3 +142,11 @@ export default{
 }
 
 </script>
+
+<style scoped>
+
+.center{
+    margin: auto;
+}
+
+</style>

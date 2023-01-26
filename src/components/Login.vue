@@ -32,7 +32,6 @@
 
             this.$router.push({name: "Maison", params: { lenom: this.nom}})
 
-
             e.preventDefault();
         },
     },

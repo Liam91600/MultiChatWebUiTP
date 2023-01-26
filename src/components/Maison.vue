@@ -26,7 +26,9 @@ export default{
 },
 
     data(){
-        return {nom:null};
+        return {
+            nom:null
+        };
     },
 
     created(){
