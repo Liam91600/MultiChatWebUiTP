@@ -12,17 +12,17 @@ const routes = [
     component: LoginView
   },
   {
-    path: '/maison/:lenom',
+    path: '/:lenom/maison',
     name: 'Maison',
     component: HomeView
   },
   {
-    path: '/maison/chaturl',
+    path: '/:lenom/chat',
     name: 'Chat',
     component: ChatView
   },
   {
-    path: '/maison/jeuurl',
+    path: '/:lenom/jeu',
     name: 'Jeu',
     component: JeuView
   }

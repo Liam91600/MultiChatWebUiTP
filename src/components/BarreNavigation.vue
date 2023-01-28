@@ -3,13 +3,13 @@
 <div id="Navig">
         <nav><h4>
 
-            <Navigation url="./../maison/nom" label="Maison"/>
+            <Navigation url="Maison" label="Maison"/>
             <span> - </span>
-            <Navigation url="chaturl" label="Discutons !!"/>
+            <Navigation url="Chat" label="Discutons !!"/>
             <span> - </span>
-            <Navigation url="jeuurl" label="Jouons !!"/>
+            <Navigation url="Jeu" label="Jouons !!"/>
             <span> - </span>
-            <Navigation url="./../" label="Au revoir"/>
+            <Navigation url="home" label="Au revoir"/>
 
         </h4></nav>
 
@@ -26,9 +26,7 @@ export default {
     components:{
     Navigation
     },
-    // props:{
-    //     nom:String,
-    // },
+
 
 }
 </script>

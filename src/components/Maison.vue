@@ -25,11 +25,6 @@ export default{
     BarreNavigation
 },
 
-    data(){
-        return {
-            nom:null
-        };
-    },
 
     created(){
         this.nom = this.$store.getters.getLeUser

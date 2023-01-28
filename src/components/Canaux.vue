@@ -83,7 +83,7 @@ export default{
         console.log("Appel service Rest")
         const APP_SERVER_URL = "http://127.0.0.1:8082/rest"
 
-        let request = new Request(APP_SERVER_URL + '/chatcanal/' + "all", {
+        let request = new Request(APP_SERVER_URL + '/chatcanal/' + "1", {
             method: 'GET',
             headers: {'Content-Type' : 'application/json'}
         })
@@ -95,7 +95,7 @@ export default{
             })
             .then(data=> {
                 console.log(data);
-                this.leschat= data
+                this.leschat= [data]
             })
     },
 
@@ -108,7 +108,7 @@ export default{
         handleNewMessage(event){
             console.log(event.data);
             this.chatMessage = JSON.parse(event.data);
-            this.chatAllMessage= this.chatAllMessage + this.chatMessage.lePseudo + " :";
+            this.chatAllMessage= this.chatAllMessage + this.chatMessage.lePseudo + " :" + this.chatMessage.leContenu +"\n";
         },
 
         chatBye(){
@@ -122,6 +122,8 @@ export default{
             this.chatReponse.lePseudo = this.$store.getters.getLeUser;
             this.chatReponse.leContenu = this.reponse;
             this.ws.send(JSON.stringify(this.chatReponse));
+            this.chatAllMessage= this.chatAllMessage + this.chatReponse.lePseudo + " :" + this.chatReponse.leContenu +"\n";
+
             this.reponse ='';
         },
 

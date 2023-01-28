@@ -57,6 +57,7 @@ export default {
     },
     data(){
         return{
+            
             plateau:{
                 case:[
                     {id: "1", image:"", state: 0},
