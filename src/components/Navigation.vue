@@ -1,7 +1,8 @@
 <template>
     
-    <!-- <router-link :to="{ name: url, params: { lenom: this.nom }}">{{ label }}</router-link>  -->
+    <!-- <router-link :to="{ name: url, params: { lenom: nom }}">{{ label }}</router-link>  -->
     <router-link :to="{ name: url}">{{ label }}</router-link>
+
 </template>
 
 <script>
@@ -11,13 +12,11 @@ export default {
         url:String,
         label:String
     },
-    data(){
-        return {
-            nom:this.$store.getters.getLeUser,
-        }
-        
-    },
-
+    // data(){
+    //     return {
+    //         nom:this.$store.getters.getLeUser,
+    //     }   
+    // },
 
 }
 </script>

@@ -13,7 +13,7 @@
         <tbody>
             <tr v-for="row in this.leschat" :key="row">
                 <td>{{ row.canalId }}</td>
-                <td>{{ row.canalName }}</td>
+                <button @click="choixCanal(row.canalId)">{{ row.canalName }}</button>
                 <td>{{ row.canalDescription }}</td>
             
             </tr>
@@ -22,7 +22,7 @@
     <span>--------------------</span>
 
     <div>
-        <button @click="chatConnect">Blablabla ...</button>
+        <!-- <button @click="chatConnect">Blablabla ...</button> -->
         <div>
             <span><pre>{{ chatAllMessage }}</pre></span>
         </div>
@@ -67,23 +67,15 @@ export default{
                 leContenu: "",
             },
             chatAllMessage: "",
-            serverUrl:"ws://localhost:8082/ws/multichat/1:Liam",
         }
     },
-
-    // props:{
-    //     pseudo: {
-    //         type:String,
-    //         required:true,
-    //     },
-    // },
 
 
     mounted(){
         console.log("Appel service Rest")
         const APP_SERVER_URL = "http://127.0.0.1:8082/rest"
 
-        let request = new Request(APP_SERVER_URL + '/chatcanal/' + "1", {
+        let request = new Request(APP_SERVER_URL + '/chatcanal/' + "all", {
             method: 'GET',
             headers: {'Content-Type' : 'application/json'}
         })
@@ -95,7 +87,7 @@ export default{
             })
             .then(data=> {
                 console.log(data);
-                this.leschat= [data]
+                this.leschat= data
             })
     },
 
@@ -119,17 +111,19 @@ export default{
         },
 
         sendReponse(){
-            this.chatReponse.lePseudo = this.$store.getters.getLeUser;
+            this.chatReponse.lePseudo = this.$route.params.lenom;
             this.chatReponse.leContenu = this.reponse;
+            
+            console.log(this.chatReponse)
             this.ws.send(JSON.stringify(this.chatReponse));
             this.chatAllMessage= this.chatAllMessage + this.chatReponse.lePseudo + " :" + this.chatReponse.leContenu +"\n";
 
             this.reponse ='';
         },
 
-        chatConnect(){
-            console.log("Starting connextion to WebSocket Server")
-            this.ws=new WebSocket(this.serverUrl);
+        chatConnect(canalid){
+            console.log("Starting connextion to WebSocket Server, canal : " + canalid )
+            this.ws=new WebSocket("ws://localhost:8082/ws/multichat/"+canalid + ":"+this.$route.params.lenom);
             this.ws.onopen = function (event){
                 console.log(event);
                 console.log("On est connecté !!!");
@@ -137,6 +131,15 @@ export default{
             this.ws.addEventListener('message', (event) => {this.handleNewMessage(event)})
 
         },
+
+        choixCanal(canalid){
+            this.chatReponse.canalId=canalid
+            this.chatConnect(canalid)
+        },
+
+
+
+
     },
 
 

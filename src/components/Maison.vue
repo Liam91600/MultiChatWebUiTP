@@ -7,8 +7,8 @@
 
     
     <div class="hello">
-        <!-- <h3> Hello {{ $route.params.lenom }}</h3> -->
-        <h3> Salut {{ $store.getters.getLeUser }}</h3>
+        <h3> Hello {{ $route.params.lenom }}</h3>
+        <!-- <h3> Salut {{ $store.getters.getLeUser }}</h3> -->
     </div>
 
 
@@ -32,7 +32,7 @@ export default{
 
 
     created(){
-        this.nom = this.$store.getters.getLeUser
+        this.nom = this.$route.params.lenom
     },
 
 }

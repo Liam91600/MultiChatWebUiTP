@@ -42,7 +42,7 @@ export default {
             this.plateau.case[i][j] = {id:(3*i+j+1).toString(), image:"", state: 0} 
         }
         }
-        console.log(this.plateau.case)
+        
 
     },
 
@@ -50,27 +50,28 @@ export default {
         traiteClick(idcase){
             console.log("Case cliquée :" + idcase);
 
-            this.plateau.case.forEach(i => {
+            this.plateau.case.forEach(row => {
+                row.forEach(cse => {
+                    if (idcase == cse.id){
+                        switch(cse.state){
+                        case 0:
+                            cse.state=1;
+                            cse.image="croix";
+                            break;
+                        case 1:
+                            cse.state=2;
+                            cse.image="rond";
+                            break;
+                        case 2:
+                            cse.state=0;
+                            cse.image="";
+                    }
+                    }
+
+                    
+                });
             
             });
-            
-        //     Object.keys(this.plateau.case).forEach((cse) => {
-        //         if (idcase==this.plateau.case[cse].id) {
-        //             switch (this.plateau.case[cse].state){
-        //                 case 0:
-        //                     this.plateau.case[cse].state = 1;
-        //                     this.plateau.case[cse].image = "croix";
-        //                     break;
-        //                 case 1:
-        //                     this.plateau.case[cse].state = 2;
-        //                     this.plateau.case[cse].image = "rond";
-        //                     break;
-        //                 case 2:
-        //                     this.plateau.case[cse].state = 0;
-        //                     this.plateau.case[cse].image = "";
-        //             }
-        //         }
-        //     })
          }
     }
 }
