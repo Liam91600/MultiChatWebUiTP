@@ -28,7 +28,7 @@
         checkForm(e){
             //stocke dans le store
             this.$store.commit("setLeUser", this.nom)
-            console.log(this.$store.getters.getLeUser)
+            // console.log(this.$store.getters.getLeUser)
 
             this.$router.push({name: "Maison", params: { lenom: this.nom}})
 

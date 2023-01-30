@@ -1,13 +1,18 @@
 <template>
 
     <Titre :msg="'Bienvenue sur la page principale, ' + nom"/>
+
+
+    <BarreNavigation/>
+
+    
     <div class="hello">
         <!-- <h3> Hello {{ $route.params.lenom }}</h3> -->
         <h3> Salut {{ $store.getters.getLeUser }}</h3>
     </div>
 
 
-    <BarreNavigation/>
+    
 
 
 

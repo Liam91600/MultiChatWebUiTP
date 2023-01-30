@@ -1,6 +1,7 @@
 <template>
     
-    <router-link :to="{ name: url, params: { lenom: label }}">{{ label }}</router-link> 
+    <!-- <router-link :to="{ name: url, params: { lenom: this.nom }}">{{ label }}</router-link>  -->
+    <router-link :to="{ name: url}">{{ label }}</router-link>
 </template>
 
 <script>
